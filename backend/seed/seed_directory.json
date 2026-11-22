@@ -1,0 +1,403 @@
+[
+  {
+    "company_id": "bajaj-finance",
+    "brand": "Bajaj Finance",
+    "legal_name": "Bajaj Finance Limited",
+    "sector": "Finance and insurance",
+    "email": "privacy@bajajfinserv.in",
+    "source_url": "https://www.bajajfinserv.in/reach-us",
+    "live_ready": true,
+    "contact_note": "Published privacy or grievance contact. Confirm the respondent before dispatch.",
+    "headers": [
+      "BAJAJF",
+      "BFLADC",
+      "BFLRCU"
+    ],
+    "header_source": "https://trai.gov.in/sites/default/files/2024-09/List_SMS_Headers_16062020_0.xlsx",
+    "header_note": "Selected historical registrations from TRAI's 16 June 2020 list, including former entity names."
+  },
+  {
+    "company_id": "paytm",
+    "brand": "Paytm",
+    "legal_name": "One97 Communications Limited",
+    "sector": "Finance and insurance",
+    "email": "grievanceofficer@paytm.com",
+    "source_url": "https://webappsstatic.paytm.com/webapps/pages/privacy.html",
+    "live_ready": true,
+    "contact_note": "Published privacy or grievance contact. Confirm the respondent before dispatch.",
+    "headers": [
+      "PAYTMC",
+      "PAYTMH",
+      "VPAYTM"
+    ],
+    "header_source": "https://trai.gov.in/sites/default/files/2024-09/List_SMS_Headers_16062020_0.xlsx",
+    "header_note": "Selected historical registrations from TRAI's 16 June 2020 list, including former entity names."
+  },
+  {
+    "company_id": "policybazaar",
+    "brand": "Policybazaar",
+    "legal_name": "Policybazaar Insurance Brokers Private Limited",
+    "sector": "Finance and insurance",
+    "email": "grievance@policybazaar.com",
+    "source_url": "https://www.policybazaar.com/legal-and-admin-policies/",
+    "live_ready": true,
+    "contact_note": "Data Grievance Officer, Policybazaar Insurance Brokers Private Limited.",
+    "headers": [
+      "POLBAZ",
+      "POLYBZ",
+      "PBCARE"
+    ],
+    "header_source": "https://trai.gov.in/sites/default/files/2024-09/List_SMS_Headers_16062020_0.xlsx",
+    "header_note": "Selected historical registrations from TRAI's 16 June 2020 list, including former entity names."
+  },
+  {
+    "company_id": "navi",
+    "brand": "Navi",
+    "legal_name": "Navi Limited",
+    "sector": "Finance and insurance",
+    "email": "help@navi.com",
+    "source_url": "https://prod-navi-tnc-privacy-policy-resources.s3.ap-south-1.amazonaws.com/privacy_policy/index.html",
+    "live_ready": false,
+    "contact_note": "Privacy grievances for lending only. Confirm the service before addressing the notice.",
+    "headers": [
+      "NAVIHQ",
+      "NAVIBK"
+    ],
+    "header_source": "https://trai.gov.in/sites/default/files/2024-09/List_SMS_Headers_16062020_0.xlsx",
+    "header_note": "Selected historical registrations from TRAI's 16 June 2020 list, including former entity names."
+  },
+  {
+    "company_id": "cred",
+    "brand": "CRED",
+    "legal_name": "Dreamplug Technologies Private Limited",
+    "sector": "Finance and insurance",
+    "email": "grievanceofficer@cred.club",
+    "source_url": "https://cred.club/legal/other-disclosures",
+    "live_ready": true,
+    "contact_note": "Published privacy or grievance contact. Confirm the respondent before dispatch.",
+    "headers": [
+      "CREDIN"
+    ],
+    "header_source": "https://trai.gov.in/sites/default/files/2024-09/List_SMS_Headers_16062020_0.xlsx",
+    "header_note": "Selected historical registrations from TRAI's 16 June 2020 list, including former entity names."
+  },
+  {
+    "company_id": "kreditbee",
+    "brand": "KreditBee",
+    "legal_name": "KrazyBee Services Limited",
+    "sector": "Finance and insurance",
+    "email": "dataprivacy@kreditbee.in",
+    "source_url": "https://www.kreditbee.in/privacy-policy",
+    "live_ready": true,
+    "contact_note": "Published privacy or grievance contact. Confirm the respondent before dispatch.",
+    "headers": [
+      "KREDTB",
+      "KRAZYB",
+      "KRDITB"
+    ],
+    "header_source": "https://trai.gov.in/sites/default/files/2024-09/List_SMS_Headers_16062020_0.xlsx",
+    "header_note": "Selected historical registrations from TRAI's 16 June 2020 list, including former entity names."
+  },
+  {
+    "company_id": "moneyview",
+    "brand": "Moneyview",
+    "legal_name": "Moneyview Limited",
+    "sector": "Finance and insurance",
+    "email": "grievance@moneyview.in",
+    "source_url": "https://moneyview.in/privacy-policy-loans",
+    "live_ready": true,
+    "contact_note": "Published privacy or grievance contact. Confirm the respondent before dispatch.",
+    "headers": [
+      "MONVEW"
+    ],
+    "header_source": "https://trai.gov.in/sites/default/files/2024-09/List_SMS_Headers_16062020_0.xlsx",
+    "header_note": "Selected historical registrations from TRAI's 16 June 2020 list, including former entity names."
+  },
+  {
+    "company_id": "angel-one",
+    "brand": "Angel One",
+    "legal_name": "Angel One Limited",
+    "sector": "Finance and insurance",
+    "email": "dpo@angelone.in",
+    "source_url": "https://www.angelone.in/privacy-policy",
+    "live_ready": true,
+    "contact_note": "Published privacy or grievance contact. Confirm the respondent before dispatch.",
+    "headers": [
+      "ANGBRK"
+    ],
+    "header_source": "https://trai.gov.in/sites/default/files/2024-09/List_SMS_Headers_16062020_0.xlsx",
+    "header_note": "Selected historical registrations from TRAI's 16 June 2020 list, including former entity names."
+  },
+  {
+    "company_id": "paisabazaar",
+    "brand": "Paisabazaar",
+    "legal_name": "Paisabazaar Marketing and Consulting Private Limited",
+    "sector": "Finance and insurance",
+    "email": "grievance-officer@paisabazaar.com",
+    "source_url": "https://www.paisabazaar.com/privacy-policy",
+    "live_ready": true,
+    "contact_note": "Published privacy or grievance contact. Confirm the respondent before dispatch.",
+    "headers": [
+      "PAISBZ",
+      "PZLOAN",
+      "PZOFFR"
+    ],
+    "header_source": "https://trai.gov.in/sites/default/files/2024-09/List_SMS_Headers_16062020_0.xlsx",
+    "header_note": "Selected historical registrations from TRAI's 16 June 2020 list, including former entity names."
+  },
+  {
+    "company_id": "byjus",
+    "brand": "BYJU'S",
+    "legal_name": "Think and Learn Private Limited",
+    "sector": "Education",
+    "email": "grievance.redressal@byjus.com",
+    "source_url": "https://byjus.com/grievance-redressal/",
+    "live_ready": true,
+    "contact_note": "Published privacy or grievance contact. Confirm the respondent before dispatch.",
+    "headers": [
+      "BYJUSC",
+      "BYJUIS",
+      "BYJUQZ"
+    ],
+    "header_source": "https://trai.gov.in/sites/default/files/2024-09/List_SMS_Headers_16062020_0.xlsx",
+    "header_note": "Selected historical registrations from TRAI's 16 June 2020 list, including former entity names."
+  },
+  {
+    "company_id": "unacademy",
+    "brand": "Unacademy",
+    "legal_name": "Sorting Hat Technologies Private Limited",
+    "sector": "Education",
+    "email": "privacy@unacademy.com",
+    "source_url": "https://unacademy.com/privacy",
+    "live_ready": true,
+    "contact_note": "Published privacy or grievance contact. Confirm the respondent before dispatch.",
+    "headers": [
+      "UNACDM",
+      "UNCDMY"
+    ],
+    "header_source": "https://trai.gov.in/sites/default/files/2024-09/List_SMS_Headers_16062020_0.xlsx",
+    "header_note": "Selected historical registrations from TRAI's 16 June 2020 list, including former entity names."
+  },
+  {
+    "company_id": "upgrad",
+    "brand": "upGrad",
+    "legal_name": "upGrad Education Private Limited",
+    "sector": "Education",
+    "email": "grievance.redressal@upgrad.com",
+    "source_url": "https://www.upgrad.com/terms/",
+    "live_ready": true,
+    "contact_note": "Published privacy or grievance contact. Confirm the respondent before dispatch.",
+    "headers": [
+      "UPGRAD"
+    ],
+    "header_source": "https://trai.gov.in/sites/default/files/2024-09/List_SMS_Headers_16062020_0.xlsx",
+    "header_note": "Selected historical registrations from TRAI's 16 June 2020 list, including former entity names."
+  },
+  {
+    "company_id": "vedantu",
+    "brand": "Vedantu",
+    "legal_name": "Vedantu Innovations Private Limited",
+    "sector": "Education",
+    "email": "dpo@vedantu.com",
+    "source_url": "https://www.vedantu.com/privacy-policy",
+    "live_ready": true,
+    "contact_note": "Published privacy or grievance contact. Confirm the respondent before dispatch.",
+    "headers": [
+      "VEDNTU",
+      "VDANTU",
+      "VEDANT"
+    ],
+    "header_source": "https://trai.gov.in/sites/default/files/2024-09/List_SMS_Headers_16062020_0.xlsx",
+    "header_note": "Selected historical registrations from TRAI's 16 June 2020 list, including former entity names."
+  },
+  {
+    "company_id": "scaler",
+    "brand": "Scaler",
+    "legal_name": "InterviewBit Technologies Private Limited",
+    "sector": "Education",
+    "email": "tech@interviewbit.com",
+    "source_url": "https://www.scaler.com/privacy/",
+    "live_ready": true,
+    "contact_note": "Published privacy or grievance contact. Confirm the respondent before dispatch.",
+    "headers": [],
+    "header_source": null,
+    "header_note": "No matching principal entity verified in the June 2020 TRAI list. Use brand or manual selection."
+  },
+  {
+    "company_id": "flipkart",
+    "brand": "Flipkart",
+    "legal_name": "Flipkart Internet Private Limited",
+    "sector": "Commerce and delivery",
+    "email": "privacy.grievance@flipkart.com",
+    "source_url": "https://www.flipkart.com/pages/privacypolicy",
+    "live_ready": true,
+    "contact_note": "Published privacy or grievance contact. Confirm the respondent before dispatch.",
+    "headers": [
+      "FLPKRT",
+      "FLIPKT",
+      "FLIKRT"
+    ],
+    "header_source": "https://trai.gov.in/sites/default/files/2024-09/List_SMS_Headers_16062020_0.xlsx",
+    "header_note": "Selected historical registrations from TRAI's 16 June 2020 list, including former entity names."
+  },
+  {
+    "company_id": "myntra",
+    "brand": "Myntra",
+    "legal_name": "Myntra Designs Private Limited",
+    "sector": "Commerce and delivery",
+    "email": "customergrievance@myntra.com",
+    "source_url": "https://www.myntra.com/privacypolicy",
+    "live_ready": true,
+    "contact_note": "Published privacy or grievance contact. Confirm the respondent before dispatch.",
+    "headers": [
+      "MYNTRA",
+      "MYNLOG"
+    ],
+    "header_source": "https://trai.gov.in/sites/default/files/2024-09/List_SMS_Headers_16062020_0.xlsx",
+    "header_note": "Selected historical registrations from TRAI's 16 June 2020 list, including former entity names."
+  },
+  {
+    "company_id": "nykaa",
+    "brand": "Nykaa",
+    "legal_name": "Nykaa E-Retail Limited",
+    "sector": "Commerce and delivery",
+    "email": "grievanceofficercs@nykaa.com",
+    "source_url": "https://www.nykaa.com/privacy-policy",
+    "live_ready": true,
+    "contact_note": "Published privacy or grievance contact. Confirm the respondent before dispatch.",
+    "headers": [
+      "NYKAAA",
+      "INYKAA",
+      "NYKAAG"
+    ],
+    "header_source": "https://trai.gov.in/sites/default/files/2024-09/List_SMS_Headers_16062020_0.xlsx",
+    "header_note": "Selected historical registrations from TRAI's 16 June 2020 list, including former entity names."
+  },
+  {
+    "company_id": "meesho",
+    "brand": "Meesho",
+    "legal_name": "Meesho Technologies Private Limited",
+    "sector": "Commerce and delivery",
+    "email": "legalsupport@meesho.com",
+    "source_url": "https://www.meesho.com/legal/privacy",
+    "live_ready": true,
+    "contact_note": "Published privacy or grievance contact. Confirm the respondent before dispatch.",
+    "headers": [
+      "MEESHO",
+      "MEEOFR",
+      "MEEOFF"
+    ],
+    "header_source": "https://trai.gov.in/sites/default/files/2024-09/List_SMS_Headers_16062020_0.xlsx",
+    "header_note": "Selected historical registrations from TRAI's 16 June 2020 list, including former entity names."
+  },
+  {
+    "company_id": "zomato",
+    "brand": "Zomato",
+    "legal_name": "Eternal Limited",
+    "sector": "Commerce and delivery",
+    "email": "grievance@zomato.com",
+    "source_url": "https://www.zomato.com/policies/terms-of-service/",
+    "live_ready": true,
+    "contact_note": "Published privacy or grievance contact. Confirm the respondent before dispatch.",
+    "headers": [],
+    "header_source": null,
+    "header_note": "No matching principal entity verified in the June 2020 TRAI list. Use brand or manual selection."
+  },
+  {
+    "company_id": "swiggy",
+    "brand": "Swiggy",
+    "legal_name": "Swiggy Limited",
+    "sector": "Commerce and delivery",
+    "email": "grievances@swiggy.in",
+    "source_url": "https://www.swiggy.com/privacy-policy",
+    "live_ready": true,
+    "contact_note": "Published privacy or grievance contact. Confirm the respondent before dispatch.",
+    "headers": [
+      "SWIGGY",
+      "SWIGPL",
+      "SWIGTC"
+    ],
+    "header_source": "https://trai.gov.in/sites/default/files/2024-09/List_SMS_Headers_16062020_0.xlsx",
+    "header_note": "Selected historical registrations from TRAI's 16 June 2020 list, including former entity names."
+  },
+  {
+    "company_id": "blinkit",
+    "brand": "Blinkit",
+    "legal_name": "Blink Commerce Private Limited",
+    "sector": "Commerce and delivery",
+    "email": "grievance.officer@blinkit.com",
+    "source_url": "https://cdn.grofers.com/layout-engine/2025-02/BCPL_Grievance-Redressal-Stakeholder-Management-Policy.pdf",
+    "live_ready": true,
+    "contact_note": "Stakeholder grievance officer, Blink Commerce Private Limited.",
+    "headers": [
+      "GROFRS",
+      "GROFFR",
+      "GROFER"
+    ],
+    "header_source": "https://trai.gov.in/sites/default/files/2024-09/List_SMS_Headers_16062020_0.xlsx",
+    "header_note": "Selected historical registrations from TRAI's 16 June 2020 list, including former entity names."
+  },
+  {
+    "company_id": "zepto",
+    "brand": "Zepto",
+    "legal_name": "Zepto Marketplace Private Limited",
+    "sector": "Commerce and delivery",
+    "email": "legal@zepto.com",
+    "source_url": "https://www.zepto.com/s/privacy-policy",
+    "live_ready": true,
+    "contact_note": "Published privacy or grievance contact. Confirm the respondent before dispatch.",
+    "headers": [],
+    "header_source": null,
+    "header_note": "No matching principal entity verified in the June 2020 TRAI list. Use brand or manual selection."
+  },
+  {
+    "company_id": "airtel",
+    "brand": "Airtel",
+    "legal_name": "Bharti Airtel Limited",
+    "sector": "Telecommunications",
+    "email": "privacygrievance.officer@airtel.com",
+    "source_url": "https://www.airtel.in/privacy-center/airtel-privacy-policy",
+    "live_ready": true,
+    "contact_note": "Published privacy or grievance contact. Confirm the respondent before dispatch.",
+    "headers": [
+      "AIRTEL",
+      "AIRAPP",
+      "AIRBIL"
+    ],
+    "header_source": "https://trai.gov.in/sites/default/files/2024-09/List_SMS_Headers_16062020_0.xlsx",
+    "header_note": "Selected historical registrations from TRAI's 16 June 2020 list, including former entity names."
+  },
+  {
+    "company_id": "jio",
+    "brand": "Jio",
+    "legal_name": "Reliance Jio Infocomm Limited",
+    "sector": "Telecommunications",
+    "email": "grievance.officer@jio.com",
+    "source_url": "https://servicesupport.jio.com/privacypolicy",
+    "live_ready": true,
+    "contact_note": "Published privacy or grievance contact. Confirm the respondent before dispatch.",
+    "headers": [
+      "JIOAPP",
+      "JIOINF",
+      "JIOSVC"
+    ],
+    "header_source": "https://trai.gov.in/sites/default/files/2024-09/List_SMS_Headers_16062020_0.xlsx",
+    "header_note": "Selected historical registrations from TRAI's 16 June 2020 list, including former entity names."
+  },
+  {
+    "company_id": "makemytrip",
+    "brand": "MakeMyTrip",
+    "legal_name": "MakeMyTrip (India) Private Limited",
+    "sector": "Travel",
+    "email": "grievanceofficer@makemytrip.com",
+    "source_url": "https://www.makemytrip.com/legal/in/eng/user_agreement.html",
+    "live_ready": true,
+    "contact_note": "Published privacy or grievance contact. Confirm the respondent before dispatch.",
+    "headers": [
+      "MMTRIP",
+      "MMTAPP"
+    ],
+    "header_source": "https://trai.gov.in/sites/default/files/2024-09/List_SMS_Headers_16062020_0.xlsx",
+    "header_note": "Selected historical registrations from TRAI's 16 June 2020 list, including former entity names."
+  }
+]
