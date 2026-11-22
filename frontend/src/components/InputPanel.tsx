@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import {
   Upload,
   Camera,
@@ -7,6 +7,8 @@ import {
   ScanLine,
   FileImage,
   FileText,
+  Paperclip,
+  ChevronDown,
 } from "lucide-react";
 import { compress } from "../lib/api";
 import { samples, sampleImage } from "../lib/sampleSpam";
@@ -27,6 +29,26 @@ export default function InputPanel({
     [identifier, setIdentifier] = useState(""),
     [brand, setBrand] = useState(""),
     [error, setError] = useState("");
+  const [directoryOpen, setDirectoryOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const companyInputId = useId();
+  const listId = companyInputId + "-companies";
+  const query = brand.trim().toLowerCase();
+  const matches = companies.filter((company) =>
+    company.brand.toLowerCase().includes(query),
+  );
+  const activeCompany = directoryOpen ? matches[activeIndex] : undefined;
+  const companyLabel = mode === "image" ? "Confirm company (optional)" : "Company";
+
+  function closeDirectory() {
+    setDirectoryOpen(false);
+    setActiveIndex(-1);
+  }
+  function chooseCompany(company: Company) {
+    setBrand(company.brand);
+    setError("");
+    closeDirectory();
+  }
   const file = useRef<HTMLInputElement>(null),
     camera = useRef<HTMLInputElement>(null);
   const ingest = useCallback(async (blob?: Blob) => {
@@ -76,8 +98,9 @@ export default function InputPanel({
         });
       }}
     >
-      <h2>Evidence intake</h2>
-      <div className="seg">
+      <h2><span className="heading-icon"><Paperclip /></span>Add your evidence</h2>
+      <p className="hint">Upload the promotion or find the sender in the company directory.</p>
+      <div className="seg" role="group" aria-label="Evidence source">
         <button
           type="button"
           aria-pressed={mode === "image"}
@@ -121,7 +144,7 @@ export default function InputPanel({
               <strong>
                 {image ? "Replace screenshot" : "Drop your screenshot here"}
               </strong>
-              <small>Browse a file or paste from clipboard</small>
+              <small>Browse files or paste an image</small>
             </button>
             <button type="button" onClick={() => camera.current?.click()}>
               <Camera size={15} /> Camera
@@ -160,20 +183,68 @@ export default function InputPanel({
           </div>
         </>
       )}
-      <label>
-        {mode === "image" ? "Confirm company (optional)" : "Company"}
-        <input
-          list="directory"
-          value={brand}
-          onChange={(e) => setBrand(e.target.value)}
-          placeholder="Search the grievance directory"
-        />
-      </label>
-      <datalist id="directory">
-        {companies.map((c) => (
-          <option key={c.company_id} value={c.brand} />
-        ))}
-      </datalist>
+      <div className="company-picker">
+        <label htmlFor={companyInputId}>{companyLabel}</label>
+        <div className="company-field">
+          <input
+            id={companyInputId}
+            role="combobox"
+            autoComplete="off"
+            aria-autocomplete="list"
+            aria-controls={listId}
+            aria-expanded={directoryOpen}
+            aria-activedescendant={activeCompany ? listId + "-" + activeCompany.company_id : undefined}
+            value={brand}
+            onFocus={() => setDirectoryOpen(true)}
+            onClick={() => setDirectoryOpen(true)}
+            onBlur={closeDirectory}
+            onChange={(event) => {
+              setBrand(event.target.value);
+              setDirectoryOpen(true);
+              setActiveIndex(-1);
+            }}
+            onKeyDown={(event) => {
+              if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+                event.preventDefault();
+                setDirectoryOpen(true);
+                if (matches.length === 0) return;
+                const next = event.key === "ArrowDown"
+                  ? (activeIndex + 1) % matches.length
+                  : activeIndex <= 0 ? matches.length - 1 : activeIndex - 1;
+                setActiveIndex(next);
+                document.getElementById(listId + "-" + matches[next].company_id)
+                  ?.scrollIntoView({ block: "nearest" });
+              } else if (event.key === "Escape" && directoryOpen) {
+                event.preventDefault();
+                closeDirectory();
+              } else if (event.key === "Enter" && activeCompany) {
+                event.preventDefault();
+                chooseCompany(activeCompany);
+              }
+            }}
+            placeholder="Search the grievance directory"
+          />
+          <ChevronDown size={16} aria-hidden="true" />
+        </div>
+        <ul id={listId} className="company-options" role="listbox" aria-label={companyLabel} hidden={!directoryOpen}>
+          {directoryOpen && matches.map((company, index) => (
+            <li
+              id={listId + "-" + company.company_id}
+              key={company.company_id}
+              role="option"
+              aria-selected={index === activeIndex}
+              onMouseDown={(event) => event.preventDefault()}
+              onClick={() => chooseCompany(company)}
+            >
+              {company.brand}
+            </li>
+          ))}
+        </ul>
+        {directoryOpen && matches.length === 0 && (
+          <p className="company-empty" role="status">No matching companies.</p>
+        )}
+      </div>
+      <h3 className="details-title">Your details</h3>
       <div className="fields">
         <label>
           Your name
@@ -181,6 +252,7 @@ export default function InputPanel({
             required
             maxLength={100}
             autoComplete="name"
+            placeholder="Full name"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />

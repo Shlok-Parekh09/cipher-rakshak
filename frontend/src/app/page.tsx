@@ -1,15 +1,15 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import {
-  Scale,
+  Fingerprint,
+  FolderOpen,
+  BookOpen,
   ScanLine,
   Building2,
   FileCheck2,
   Send,
   Clock,
-  Layers,
   BriefcaseBusiness,
-  ShieldCheck,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import InputPanel from "../components/InputPanel";
@@ -20,10 +20,10 @@ import { client, defaults } from "../lib/api";
 import type { AnalyzeInput, Company, Notice, Settings } from "../types/cipher_rakshak";
 
 const stages = [
-  [ScanLine, "Input evidence"],
-  [Building2, "Match recipient"],
-  [FileCheck2, "Review notice"],
-  [Send, "Dispatch & track"],
+  [ScanLine, "Add evidence", "Screenshot or company name"],
+  [Building2, "Identify the sender", "Check the company and contact"],
+  [FileCheck2, "Review your notice", "Edit the request before sending"],
+  [Send, "Send and follow up", "Track replies and next steps"],
 ] as const;
 export default function Page() {
   const analysisStart = useRef<number | null>(null);
@@ -126,6 +126,7 @@ export default function Page() {
   return (
     <>
       <div className="app">
+        <a className="skip" href="#workspace">Skip to workspace</a>
         <Navbar
           settings={settings}
           token={token}
@@ -138,28 +139,27 @@ export default function Page() {
             localStorage.setItem("cipher-rakshak-settings", JSON.stringify(s));
           }}
         />
-        <main>
-          <div className="breadcrumb">
-            <Layers size={15} /> Workspace <span>/</span>{" "}
-            {tab === "work" ? "Notice desk" : "Compliance radar"}
-          </div>
+        <main id="workspace">
           <section className="hero">
-            <div>
-              <div className="eyeline">
-                <span /> DATA PRINCIPAL WORKSPACE
-              </div>
+            <div className="hero-copy">
               <h1>
                 {tab === "work" ? "Privacy notice desk" : "Compliance radar"}
               </h1>
               <p>
                 {tab === "work"
-                  ? "Turn an unwanted promotion into a reviewed privacy request."
+                  ? "Identify who sent a promotion, review your request and ask them to stop contacting you."
                   : "Track responses, review deadlines and prepare a complaint dossier."}
               </p>
             </div>
-            <Scale className="heroicon" strokeWidth={1} />
+            <div className="case-art" aria-hidden="true">
+              <div className="contours" />
+              <div className="paper backsheet" />
+              <div className="paper topsheet"><i /><i /><i /><i /></div>
+              <div className="case-folder"><span /><span /></div>
+              <div className="case-seal"><Fingerprint /></div>
+            </div>
           </section>
-          <nav className="tabs">
+          <nav className="tabs" aria-label="Workspace views">
             <button
               aria-current={tab === "work" ? "page" : undefined}
               onClick={() => setTab("work")}
@@ -263,25 +263,24 @@ export default function Page() {
             </div>
             <aside>
               <section className="card flow">
-                <h2>Notice pipeline</h2>
+                <h2><FolderOpen /> Notice workflow</h2>
                 {workflowTime !== null && <p className="mono">{workflowTime.toLocaleString()} ms from analysis to dispatch</p>}
                 <ol>
-                  {stages.map(([Icon, label], i) => (
-                    <li key={label} className={i <= stage ? "active" : ""}>
+                  {stages.map(([Icon, label, description], i) => (
+                    <li key={label} className={i <= stage ? "active" : ""} aria-current={i === stage ? "step" : undefined}>
                       <span>
                         <Icon size={17} />
                       </span>
                       <div>
-                        <small>STEP 0{i + 1}</small>
                         <strong>{label}</strong>
+                        <small>{description}</small>
                       </div>
                     </li>
                   ))}
                 </ol>
               </section>
               <section className="legal">
-                <ShieldCheck />
-                <h3>Statutory reference</h3>
+                <h3><BookOpen size={18} /> Statutory reference</h3>
                 <p>
                   Consent withdrawal and erasure under sections 6(4) and 12(3)
                   are scheduled to commence in May 2027. The seven-day tracker

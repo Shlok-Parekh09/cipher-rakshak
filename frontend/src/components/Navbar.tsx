@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Shield, SlidersHorizontal, Timer, X, LockKeyhole } from "lucide-react";
+import { Fingerprint, CircleUserRound, SlidersHorizontal, Timer, X, LockKeyhole } from "lucide-react";
 import { account, endpoint } from "../lib/api";
 import type { Settings } from "../types/cipher_rakshak";
 
@@ -27,14 +27,19 @@ export default function Navbar({
     [secret, setSecret] = useState(""),
     [msg, setMsg] = useState(""),
     [working, setWorking] = useState(false);
+  function openAccount() {
+    setEdit(settings);
+    setOpen(true);
+    setMsg("");
+  }
   return (
     <header>
       <div className="nav">
         <a href="#" className="brand">
           <span className="mark">
-            <Shield />
+            <Fingerprint />
           </span>
-          CipherRakshak
+          <span>Cipher<span className="brand-tail">Rakshak</span></span>
         </a>
         <span className="navlabel">Citizen privacy workspace</span>
         <span className="spacer" />
@@ -46,14 +51,13 @@ export default function Navbar({
         <button
           className="subtle"
           disabled={busy}
-          onClick={() => {
-            setEdit(settings);
-            setOpen(true);
-            setMsg("");
-          }}
+          onClick={openAccount}
         >
           <SlidersHorizontal size={16} />
           {settings.safe ? "Safe mode" : "Live dispatch"}
+        </button>
+        <button className="account-button" disabled={busy} onClick={openAccount}>
+          <CircleUserRound size={17} /> Account
         </button>
       </div>
       {open && (
