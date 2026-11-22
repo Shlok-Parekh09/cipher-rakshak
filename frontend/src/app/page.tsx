@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, Suspense } from "react";
 import {
   Fingerprint,
   FolderOpen,
@@ -11,6 +11,8 @@ import {
   Clock,
   BriefcaseBusiness,
 } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import LandingPage from "../components/LandingPage";
 import Navbar from "../components/Navbar";
 import InputPanel from "../components/InputPanel";
 import NoticeWorkspace from "../components/NoticeWorkspace";
@@ -25,35 +27,51 @@ const stages = [
   [FileCheck2, "Review your notice", "Edit the request before sending"],
   [Send, "Send and follow up", "Track replies and next steps"],
 ] as const;
-export default function Page() {
+
+type View = "landing" | "workspace";
+
+function PageContent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const analysisStart = useRef<number | null>(null);
   const [workflowTime, setWorkflowTime] = useState<number | null>(null);
-  const [settings, configure] = useState<Settings>(defaults),
-    [token, login] = useState(""),
-    [ready, setReady] = useState(false),
-    [companies, setCompanies] = useState<Company[]>([]);
-  const [tab, setTab] = useState("work"),
-    [row, setRow] = useState<Notice | null>(null),
-    [dossier, setDossier] = useState<Notice | null>(null),
-    [rows, setRows] = useState<Notice[]>([]);
-  const [cursor, setCursor] = useState<Record<string, string> | null>(null),
-    [busy, setBusy] = useState(false),
-    [msg, setMsg] = useState(""),
-    [latency, setLatency] = useState(0),
-    [stage, setStage] = useState(0);
+  const [settings, configure] = useState<Settings>(defaults);
+  const [token, login] = useState("");
+  const [ready, setReady] = useState(false);
+  const [companies, setCompanies] = useState<Company[]>([]);
+  const [view, setView] = useState<View>("landing");
+  const [pendingEmail, setPendingEmail] = useState<string>("");
+  const [pendingSender, setPendingSender] = useState<string>("");
+  
+  const [tab, setTab] = useState("work");
+  const [row, setRow] = useState<Notice | null>(null);
+  const [dossier, setDossier] = useState<Notice | null>(null);
+  const [rows, setRows] = useState<Notice[]>([]);
+  const [cursor, setCursor] = useState<Record<string, string> | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [msg, setMsg] = useState("");
+  const [latency, setLatency] = useState(0);
+  const [stage, setStage] = useState(0);
+
   useEffect(() => {
     try {
       configure({
         ...defaults,
         ...JSON.parse(localStorage.getItem("cipher-rakshak-settings") || "{}"),
       });
+      const savedToken = localStorage.getItem("cipher-rakshak-token") || "";
+      if (savedToken) {
+        login(savedToken);
+        setView("workspace");
+      }
     } catch {}
     setReady(true);
   }, []);
+
   useEffect(() => {
     let alive = true;
     setCompanies([]);
-    if (ready && settings.endpoint) {
+    if (ready && settings.endpoint && token) {
       client(settings, "")
         .directory()
         .then((r) => {
@@ -69,8 +87,10 @@ export default function Page() {
     return () => {
       alive = false;
     };
-  }, [settings, ready]);
+  }, [settings, ready, token]);
+
   const api = client(settings, token);
+
   async function run(task: () => Promise<void>) {
     if (busy) return;
     setBusy(true);
@@ -85,6 +105,7 @@ export default function Page() {
       setBusy(false);
     }
   }
+
   async function load(append = false) {
     const p = await api.track(append ? cursor || undefined : undefined);
     setRows((prev) =>
@@ -99,16 +120,26 @@ export default function Page() {
     );
     setCursor(p.cursor);
   }
+
   function resetAccount(t: string) {
     analysisStart.current = null;
     setWorkflowTime(null);
     login(t);
+    if (!t) {
+      // Signing out
+      localStorage.removeItem("cipher-rakshak-token");
+      setView("landing");
+      setTab("work");
+      setMsg("");
+      setLatency(0);
+    }
     setRows([]);
     setCursor(null);
     setRow(null);
     setDossier(null);
     setStage(0);
   }
+
   function analyze(input: AnalyzeInput) {
     void run(async () => {
       analysisStart.current = performance.now();
@@ -123,6 +154,19 @@ export default function Page() {
       }
     });
   }
+
+  function handleNavigateToAuth(mode: "signin" | "signup", email?: string, sender?: string) {
+    if (email) setPendingEmail(email);
+    if (sender) setPendingSender(sender);
+    router.push(`/auth?mode=${mode}${email ? `&email=${encodeURIComponent(email)}` : ""}`);
+  }
+
+  // Show landing page if not authenticated
+  if (view === "landing" && !token) {
+    return <LandingPage onNavigateToAuth={handleNavigateToAuth} />;
+  }
+
+  // Show workspace if authenticated
   return (
     <>
       <div className="app">
@@ -302,5 +346,13 @@ export default function Page() {
         <EscalationModal row={dossier} close={() => setDossier(null)} />
       )}
     </>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>}>
+      <PageContent />
+    </Suspense>
   );
 }

@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
-import { Fingerprint, CircleUserRound, SlidersHorizontal, Timer, X, LockKeyhole } from "lucide-react";
-import { account, endpoint } from "../lib/api";
+import { useRouter } from "next/navigation";
+import { Fingerprint, CircleUserRound, LogOut, SlidersHorizontal, Timer } from "lucide-react";
+import { endpoint } from "../lib/api";
 import type { Settings } from "../types/cipher_rakshak";
 
 interface Props {
@@ -20,17 +21,18 @@ export default function Navbar({
   latency,
   busy,
 }: Props) {
-  const [open, setOpen] = useState(false),
-    [edit, setEdit] = useState(settings),
-    [mode, setMode] = useState<"signin" | "signup" | "confirm">("signin");
-  const [email, setEmail] = useState(""),
-    [secret, setSecret] = useState(""),
-    [msg, setMsg] = useState(""),
-    [working, setWorking] = useState(false);
+  const router = useRouter();
+  const [edit, setEdit] = useState(settings);
+  const [accountOpen, setAccountOpen] = useState(false);
+  
   function openAccount() {
-    setEdit(settings);
-    setOpen(true);
-    setMsg("");
+    if (token) {
+      // Show settings dialog for signed-in users
+      setEdit(settings);
+    } else {
+      // Navigate to auth page for non-signed-in users
+      router.push("/auth");
+    }
   }
   return (
     <header>
@@ -56,140 +58,24 @@ export default function Navbar({
           <SlidersHorizontal size={16} />
           {settings.safe ? "Safe mode" : "Live dispatch"}
         </button>
-        <button className="account-button" disabled={busy} onClick={openAccount}>
-          <CircleUserRound size={17} /> Account
+        <button
+          type="button"
+          className="account-button"
+          aria-expanded={token ? accountOpen : undefined}
+          aria-controls={accountOpen && token ? "account-panel" : undefined}
+          onClick={() => token ? setAccountOpen((open) => !open) : router.push("/auth")}
+        >
+          <CircleUserRound size={21} aria-hidden="true" style={{ display: "block" }} /> {token ? "Account" : "Sign in"}
         </button>
-      </div>
-      {open && (
-        <dialog open aria-label="Connection and account">
-          <div className="row">
-            <h2>Connection & account</h2>
-            <button aria-label="Close" onClick={() => setOpen(false)}>
-              <X />
+        {accountOpen && token && (
+          <div className="account-menu" id="account-panel">
+            <div className="account-menu-title"><CircleUserRound size={18} /> Signed in</div>
+            <button type="button" className="account-menu-signout" onClick={() => { setAccountOpen(false); login(""); }}>
+              <LogOut size={16} aria-hidden="true" /> Sign out
             </button>
           </div>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              try {
-                save({ ...edit, endpoint: endpoint(edit.endpoint) });
-                setMsg("Connection saved.");
-              } catch (err) {
-                setMsg((err as Error).message);
-              }
-            }}
-          >
-            <label>
-              Trusted CipherRakshak API URL
-              <input
-                type="url"
-                value={edit.endpoint}
-                required
-                onChange={(e) => setEdit({ ...edit, endpoint: e.target.value })}
-              />
-            </label>
-            <label className="inline">
-              <input
-                type="checkbox"
-                checked={edit.safe}
-                onChange={(e) => setEdit({ ...edit, safe: e.target.checked })}
-              />{" "}
-              Route mail to the demo inbox
-            </label>
-            {edit.safe && (
-              <label>
-                Verified demo inbox
-                <input
-                  type="email"
-                  value={edit.recipient}
-                  onChange={(e) =>
-                    setEdit({ ...edit, recipient: e.target.value })
-                  }
-                />
-              </label>
-            )}
-            <button>Save connection</button>
-          </form>
-          <hr />
-          {token ? (
-            <button
-              onClick={() => {
-                login("");
-                setMsg("Signed out.");
-              }}
-            >
-              Sign out
-            </button>
-          ) : (
-            <form
-              onSubmit={async (e) => {
-                e.preventDefault();
-                setWorking(true);
-                try {
-                  const t = await account(mode, email, secret);
-                  setSecret("");
-                  if (t) {
-                    login(t);
-                    setOpen(false);
-                  } else if (mode === "signup") {
-                    setMode("confirm");
-                    setMsg("Enter the verification code from your email.");
-                  } else {
-                    setMode("signin");
-                    setMsg("Email verified. Sign in to continue.");
-                  }
-                } catch (err) {
-                  setMsg((err as Error).message);
-                } finally {
-                  setWorking(false);
-                }
-              }}
-            >
-              <label>
-                Citizen account
-                <select
-                  value={mode}
-                  onChange={(e) => {
-                    setMode(e.target.value as typeof mode);
-                    setSecret("");
-                  }}
-                >
-                  <option value="signin">Sign in</option>
-                  <option value="signup">Create account</option>
-                  <option value="confirm">Verify email</option>
-                </select>
-              </label>
-              <label>
-                Email
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </label>
-              <label>
-                {mode === "confirm" ? "Email verification code" : "Password"}
-                <input
-                  type={mode === "confirm" ? "text" : "password"}
-                  required
-                  value={secret}
-                  onChange={(e) => setSecret(e.target.value)}
-                />
-              </label>
-              <button disabled={working}>
-                <LockKeyhole size={15} />
-                {mode === "signin"
-                  ? "Sign in"
-                  : mode === "signup"
-                    ? "Create account"
-                    : "Verify email"}
-              </button>
-            </form>
-          )}
-          <p role="status">{msg}</p>
-        </dialog>
-      )}
+        )}
+      </div>
     </header>
   );
 }

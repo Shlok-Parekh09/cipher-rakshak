@@ -1,0 +1,98 @@
+html:has(.lux-root),
+body:has(.lux-root) {
+  overflow: clip !important;
+  height: 100%;
+}
+html.landing-lock,
+body.landing-lock {
+  overflow: clip !important;
+  height: 100% !important;
+  max-height: 100% !important;
+}
+
+.lux-root {
+  position: fixed;
+  inset: 0;
+  min-height: 100svh;
+  height: 100svh;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 95% 5%, #073531, transparent 48%), #081315;
+}
+.lux-root .lux-header {
+  width: min(100%, 1380px);
+  padding: 24px clamp(20px, 5.1vw, 72px);
+  gap: 18px;
+  background: transparent;
+  border: 0;
+}
+.lux-brand svg { width: 39px; height: 44px; }
+.lux-actions .start { border-radius: 9px; }
+.lux-root .lux-hero {
+  width: min(100%, 1380px);
+  height: calc(100svh - 92px);
+  min-height: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 40px clamp(20px, 6.3vw, 87px) 100px;
+  align-items: start;
+  grid-template-columns: 53% 47%;
+}
+.lux-copy .eyebrow { display: none; }
+.lux-copy h1 {
+  font-size: clamp(44px, 5.45vw, 76px);
+  letter-spacing: -.045em;
+  line-height: .98;
+}
+.lux-copy h1 em { color: inherit; }
+.lux-copy p { max-width: 565px; margin-top: 18px; font-size: clamp(16px, 1.52vw, 21px); line-height: 1.2; }
+.lux-copy .trace-bar { max-width: 563px; margin-top: 29px; padding-block: 4px; }
+.lux-copy .trace-bar button { background: #1ce6ba; padding-block: 10px; white-space: nowrap; }
+.lux-copy .trace-bar button svg { color: inherit; }
+.lux-art {
+  position: relative;
+  height: auto;
+  aspect-ratio: 620 / 595;
+  width: 110%;
+  margin-top: -42px;
+  isolation: isolate;
+}
+.lux-art::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/landing-shield-original-frame.png") right 53% / 222% auto no-repeat;
+  mask-image: linear-gradient(to right, transparent, #000 10%, #000 88%, transparent), linear-gradient(to bottom, transparent, #000 5%, #000 83%, transparent);
+  mask-composite: intersect;
+}
+.lux-art::after {
+  content: "";
+  position: absolute;
+  top: 37%;
+  left: 37%;
+  width: 45%;
+  aspect-ratio: 1;
+  box-sizing: border-box;
+  border-radius: 50%;
+  z-index: 1;
+  background:
+    conic-gradient(transparent 0deg, #ffcc6577 15deg, #fff4bb 62deg, transparent 103deg,
+      transparent 161deg, #ffc85a 217deg, transparent 260deg);
+  mask-image: radial-gradient(circle closest-side, transparent 87%, #000 92% 97%, transparent);
+  mix-blend-mode: screen;
+  animation: shield-ring-spin 2.8s linear infinite;
+  will-change: transform;
+  pointer-events: none;
+}
+@keyframes shield-ring-spin {
+  from { transform: translate(-50%, -50%) rotate(22deg) scaleX(.73) rotate(0turn); }
+  to { transform: translate(-50%, -50%) rotate(22deg) scaleX(.73) rotate(1turn); }
+}
+@media (max-width: 900px) {
+  .lux-root .lux-hero { grid-template-columns: 1fr; padding-top: 26px; height: calc(100svh - 84px); }
+  .lux-art { width: min(100%, 630px); margin: 22px auto 0; order: 0; }
+  .lux-copy h1 { font-size: clamp(35px, 8.4vw, 68px); }
+}
+.shield-motion {
+  position: relative;
+  min-width: 0;
+}

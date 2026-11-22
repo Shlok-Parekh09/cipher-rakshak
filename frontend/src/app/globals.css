@@ -149,6 +149,7 @@ main,
 .nav {
   min-height: 72px;
   gap: 0.75rem;
+  position: relative;
 }
 .brand {
   gap: 0.6rem;
@@ -199,6 +200,42 @@ main,
   color: white;
   background: var(--green);
 }
+.account-menu {
+  position: absolute;
+  z-index: 20;
+  top: 62px;
+  right: 0;
+  width: 190px;
+  padding: 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+  box-shadow: 0 14px 32px rgba(20, 62, 51, 0.16);
+}
+.account-menu-title {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.55rem 0.6rem;
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 650;
+  border-bottom: 1px solid var(--line);
+}
+.account-menu button {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 8px;
+  padding: 0.55rem;
+  text-align: left;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 0.82rem;
+}
+.account-menu button:hover { background: #edf4e9; }
+.account-menu-signout { color: #a33b2f !important; }
 main {
   padding-block: 1.65rem 3.5rem;
 }
